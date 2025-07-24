@@ -1,7 +1,6 @@
 // Quantum state representation
-#![allow(dead_code)]
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum QuantumState {
     Superposition,
     Collapsed,
@@ -23,5 +22,12 @@ impl QuantumSystem {
 
     pub fn simulate(&self) {
         println!("Quantum simulation placeholder");
+    }
+
+    pub fn collapse_state(&self, state: QuantumState) -> QuantumState {
+        match state {
+            QuantumState::Superposition => QuantumState::Collapsed,
+            _ => state,
+        }
     }
 }
