@@ -1,4 +1,5 @@
 # MORPH
+```
 @pattern_meta@
 GLIMMER Pattern: {
   "metadata": {
@@ -109,3 +110,4 @@ GLIMMER Pattern: {
         {#6A0572} FieldStabilization: "min∫|∂Φ/∂t + ∇·J - κ|² dΩ" |
         {#1A936F} QuantumCollapse: "P(collapse) = e^(-E_dev/kT)"
     ]> morphogenesis
+```
