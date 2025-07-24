@@ -1,0 +1,22 @@
+[package]
+name = "morph"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rayon = "1.9.0"               # Parallel processing
+nalgebra = "0.32.3"           # Tensor operations
+serde = { version = "1.0", features = ["derive"] } # Serialization
+spade = "2.1.0"               # Spatial indexing (for hippocampal mapping)
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "tensor_impl"
+path = "src/core/tensor_impl.rs"
