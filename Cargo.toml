@@ -35,10 +35,6 @@ name = "runtime_test"
 path = "src/phylogenetic/runtime_test.rs"
 
 [[bin]]
-name = "field_test"
-path = "src/field_stabilization/field_test.rs"
-
-[[bin]]
 name = "integration_test"
 path = "src/quantum_integration/integration_test.rs"
 

@@ -1,8 +1,7 @@
-// Consciousness emergence metrics and monitoring
+// Consciousness emergence metrics and monitoring (FIXED)
 #![allow(dead_code)]
 
-use crate::core::tensor::MorphicTensor;
-use crate::quantum::state::QuantumState;
+use crate::core::tensor::MorphicTensor;  // Removed unused QuantumState import
 use std::collections::HashMap;
 
 pub struct EEGSimulator {
@@ -28,18 +27,11 @@ impl EEGSimulator {
     /// Simulate EEG readings based on tensor state
     pub fn simulate(&self, tensor: &MorphicTensor) -> HashMap<String, f64> {
         let mut readings = HashMap::new();
-
-        // Base amplitude based on entanglement strength
         let base_amplitude = tensor.entanglement.strength * 10.0;
 
-        // Generate band-specific readings
         for (band, (low, high)) in &self.frequency_bands {
             let band_center = (low + high) / 2.0;
-            let spread = high - low;
-
-            // Simple simulation: amplitude based on entanglement and band
             let amplitude = base_amplitude * (1.0 / band_center.sqrt());
-
             readings.insert(band.clone(), amplitude);
         }
 
@@ -75,20 +67,28 @@ impl PhiCalculator {
         }
     }
 
-    /// Simplified φ computation
+    /// Improved φ computation
     pub fn compute_phi(&self, system: &[MorphicTensor]) -> f64 {
-        // Calculate total entanglement strength
+        if system.is_empty() {
+            return 0.0;
+        }
+
         let total_entanglement: f64 = system.iter()
             .map(|t| t.entanglement.strength)
             .sum();
 
-        // Calculate average potential energy
+        // Handle empty potential vectors
         let avg_potential: f64 = system.iter()
-            .map(|t| t.potential.values.norm())
+            .filter_map(|t| {
+                if t.potential.values.is_empty() {
+                    None
+                } else {
+                    Some(t.potential.values.norm())
+                }
+            })
             .sum::<f64>() / system.len() as f64;
 
-        // Simplified φ formula
-        (total_entanglement * avg_potential * self.complexity_factor).sqrt()
+        (total_entanglement * avg_potential.max(0.1) * self.complexity_factor).sqrt()
     }
 }
 
@@ -103,6 +103,9 @@ impl QualiaMapper {
         palette.insert("green".to_string(), [0.0, 1.0, 0.0]);
         palette.insert("blue".to_string(), [0.0, 0.0, 1.0]);
         palette.insert("yellow".to_string(), [1.0, 1.0, 0.0]);
+        palette.insert("purple".to_string(), [0.7, 0.3, 0.7]);  // Added purple
+        palette.insert("cyan".to_string(), [0.0, 1.0, 1.0]);
+        palette.insert("magenta".to_string(), [1.0, 0.0, 1.0]);
 
         QualiaMapper {
             qualia_palette: palette,
@@ -111,18 +114,15 @@ impl QualiaMapper {
 
     /// Map tensor state to qualia representation
     pub fn map_to_qualia(&self, tensor: &MorphicTensor) -> [f64; 3] {
-        // Simple mapping based on entanglement strength and position
         let r = tensor.entanglement.strength;
         let g = tensor.position()[0].abs() % 1.0;
         let b = tensor.position()[1].abs() % 1.0;
-
         [r, g, b]
     }
 
     /// Convert RGB to qualia description
     pub fn describe_qualia(&self, rgb: [f64; 3]) -> String {
-        let mut closest = "void";
-        let mut min_dist = f64::MAX;
+        let (mut closest, mut min_dist) = ("void", f64::MAX);
 
         for (name, color) in &self.qualia_palette {
             let dist = (rgb[0] - color[0]).powi(2)
