@@ -6,3 +6,5 @@ pub mod phylogenetic;
 pub mod quantum;
 
 pub mod bidirectional_compiler;
+
+pub mod field_stabilization;
