@@ -1,4 +1,4 @@
-// Quantum memory management
+// Quantum memory management (Updated for Void state)
 #![allow(dead_code)]
 
 use crate::core::tensor::MorphicTensor;
@@ -18,6 +18,9 @@ impl QuantumMemoryManager {
     /// Store a tensor in quantum memory
     pub fn store(&self, tensor: &MorphicTensor) {
         match tensor.quantum_state {
+            QuantumState::Void => {
+                println!("Storing void tensor in primordial memory");
+            },
             QuantumState::Superposition => {
                 println!("Storing tensor in quantum superposition memory");
             },
