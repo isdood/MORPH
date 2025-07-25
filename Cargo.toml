@@ -41,3 +41,7 @@ path = "src/quantum_integration/integration_test.rs"
 [[bin]]
 name = "consciousness_test"
 path = "src/consciousness/consciousness_test.rs"
+
+[[bin]]
+name = "manifestation_test"
+path = "src/system_manifestation/manifestation_test.rs"

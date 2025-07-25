@@ -10,3 +10,5 @@ pub mod bidirectional_compiler;
 pub mod quantum_integration;
 
 pub mod consciousness;
+
+pub mod system_manifestation;
