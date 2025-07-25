@@ -1,5 +1,5 @@
 // Field Stabilization Test
-use morph::field_stabilization::{FieldStabilizer, StabilizationIntegrator};
+use morph::field_stabilization::FieldStabilizer;
 use morph::core::tensor::MorphicTensor;
 use nalgebra::DVector;
 
@@ -12,11 +12,11 @@ fn main() {
 
     // Create stabilizer
     let stabilizer = FieldStabilizer::new(0.1, 0.01, 100);
-    let integrator = StabilizationIntegrator::new(stabilizer);
 
-    // Run integration
-    integrator.integrate(&mut tensor);
+    // Run stabilization
+    stabilizer.gradient_descent(&mut tensor);
+    let energy = stabilizer.developmental_energy(&tensor);
 
-    println!("Final potential values: {:?}", tensor.potential.values.as_slice());
+    println!("Developmental energy: {:.4}", energy);
     println!("✅ Field stabilization tests completed!");
 }
