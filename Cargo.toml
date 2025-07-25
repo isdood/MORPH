@@ -29,3 +29,7 @@ path = "src/hippocampus/hippocampal_test.rs"
 [[bin]]
 name = "compiler_test"
 path = "src/bidirectional_compiler/compiler_test.rs"
+
+[[bin]]
+name = "runtime_test"
+path = "src/phylogenetic/runtime_test.rs"
