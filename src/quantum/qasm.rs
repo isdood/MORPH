@@ -8,6 +8,7 @@ pub enum QuantumOperation {
     Y, // Pauli-Y gate
     Z, // Pauli-Z gate
     CX, // Controlled-X (CNOT) gate
+    T, // T gate
     Measure, // Measurement operation
     Custom(String), // Custom operation
 }
@@ -20,6 +21,7 @@ impl QuantumOperation {
             QuantumOperation::Y => "y".to_string(),
             QuantumOperation::Z => "z".to_string(),
             QuantumOperation::CX => "cx".to_string(),
+            QuantumOperation::T => "t".to_string(),
             QuantumOperation::Measure => "measure".to_string(),
             QuantumOperation::Custom(op) => op.clone(),
         }

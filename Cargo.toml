@@ -58,3 +58,7 @@ path = "src/quantum_classical/bridge_test.rs"
 [[bin]]
 name = "optimization_test"
 path = "src/evolutionary/optimization_test.rs"
+
+[[bin]]
+name = "simulation_test"
+path = "src/quantum_simulation/simulation_test.rs"

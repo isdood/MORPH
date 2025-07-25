@@ -18,3 +18,5 @@ pub mod system_manifestation;
 pub mod quantum_classical;
 
 pub mod evolutionary;
+
+pub mod quantum_simulation;
