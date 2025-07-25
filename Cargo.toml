@@ -41,3 +41,7 @@ path = "src/field_stabilization/field_test.rs"
 [[bin]]
 name = "integration_test"
 path = "src/quantum_integration/integration_test.rs"
+
+[[bin]]
+name = "consciousness_test"
+path = "src/consciousness/consciousness_test.rs"
