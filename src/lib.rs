@@ -12,3 +12,5 @@ pub mod quantum_integration;
 pub mod consciousness;
 
 pub mod system_manifestation;
+
+pub mod quantum_classical;
