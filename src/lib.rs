@@ -20,3 +20,5 @@ pub mod quantum_classical;
 pub mod evolutionary;
 
 pub mod quantum_simulation;
+
+pub mod distributed;

@@ -2,7 +2,6 @@
 use morph::quantum_classical::{HybridComputation, DecoherenceHandler, ClassicalShadowing};
 use morph::core::tensor::MorphicTensor;
 use morph::quantum::qasm::QuantumOperation;
-use morph::quantum::state::QuantumState;
 use nalgebra::DVector;
 
 fn main() {

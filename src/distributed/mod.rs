@@ -1,18 +1,10 @@
-#!/usr/bin/env bash
-# MORPH Phase 12: Distributed Orchestration
-echo "Executing Phase 12: Distributed Orchestration"
-
-# Create distributed orchestration module
-mkdir -p src/distributed
-
-cat > src/distributed/mod.rs << 'EOF'
 // Distributed quantum computation orchestration
 #![allow(dead_code)]
 
 use crate::core::tensor::MorphicTensor;
 use crate::quantum::qasm::QuantumOperation;
 use std::collections::HashMap;
-use std::net::{TcpListener, TcpStream};
+use std::net::TcpListener;
 use std::io::{Read, Write};
 use std::thread;
 use rand::Rng;
@@ -153,104 +145,3 @@ impl ResultAggregator {
         }
     }
 }
-EOF
-
-# Create test module
-cat > src/distributed/orchestration_test.rs << 'EOF'
-// Distributed Orchestration Test
-use morph::distributed::{NodeManager, TaskScheduler, ResultAggregator};
-use morph::core::tensor::MorphicTensor;
-use morph::quantum::qasm::QuantumOperation;
-use std::collections::HashMap;
-
-fn main() {
-    println!("Testing Distributed Orchestration...");
-
-    // Create node manager
-    let node_addresses = vec![
-        "192.168.0.101".to_string(),
-        "192.168.0.102".to_string(),
-        "192.168.0.103".to_string()
-    ];
-    let manager = NodeManager::new(node_addresses, 4);
-
-    // Start cluster listener
-    manager.start_cluster_listener(8080);
-
-    // Discover nodes
-    let available_nodes = manager.discover_nodes();
-
-    // Create test tensor
-    let tensor = MorphicTensor::void();
-
-    // Create operations
-    let operations = vec![
-        QuantumOperation::H,
-        QuantumOperation::X,
-        QuantumOperation::CX,
-        QuantumOperation::T,
-        QuantumOperation::Measure,
-        QuantumOperation::Z,
-    ];
-
-    // Distribute operations
-    manager.distribute_operations(&operations, &tensor);
-
-    // Schedule tasks
-    let scheduler = TaskScheduler::new();
-    scheduler.schedule_tasks(&operations, &available_nodes);
-
-    // Simulate node failure
-    scheduler.handle_failure("192.168.0.102");
-
-    // Aggregate results
-    let aggregator = ResultAggregator::new();
-    let results = vec![0.75, 0.82, 0.68, 0.91];
-    let final_result = aggregator.aggregate_results(&results);
-    println!("Final aggregated result: {:.4}", final_result);
-
-    println!("✅ Distributed orchestration tests completed!");
-}
-EOF
-
-# Add distributed to crate root
-if ! grep -q "pub mod distributed;" src/lib.rs; then
-    echo -e "\npub mod distributed;" >> src/lib.rs
-fi
-
-# Update Cargo.toml
-if ! grep -q "name = \"orchestration_test\"" Cargo.toml; then
-    echo "" >> Cargo.toml
-    echo "[[bin]]" >> Cargo.toml
-    echo 'name = "orchestration_test"' >> Cargo.toml
-    echo 'path = "src/distributed/orchestration_test.rs"' >> Cargo.toml
-fi
-
-# MORPH Phase 12.5: Code Cleanup
-echo "Executing Code Cleanup Phase"
-
-# 1. Fix unused import in distributed module
-sed -i 's/use std::net::{TcpListener, TcpStream};/use std::net::TcpListener;/g' src/distributed/mod.rs
-
-# 2. Fix function signature in phylogenetic module
-sed -i 's/_script: script: &\[QuantumOperation\]\[QuantumOperation\]/_script: \&\[QuantumOperation\]/g' src/phylogenetic/mod.rs
-
-# 3. Fix unused import in orchestration test
-sed -i '5d' src/distributed/orchestration_test.rs  # Remove unused HashMap import
-
-# 4. Fix unused import in bridge test
-sed -i '5d' src/quantum_classical/bridge_test.rs  # Remove unused QuantumState import
-
-echo "✅ Code cleanup completed! All warnings resolved."
-
-# Build and test
-echo "Building and testing distributed orchestration..."
-cargo build
-cargo run --bin orchestration_test
-
-echo "✅ Phase 12 completed! Next steps:"
-echo "1. Implement Consciousness Metrics (Phase 13)"
-echo "2. Develop integrated information (Φ) calculation"
-echo "3. Create neural oscillation tracking"
-echo "4. Implement real-time consciousness monitoring"
-echo "5. Prepare for system-wide consciousness boot"

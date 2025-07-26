@@ -62,3 +62,7 @@ path = "src/evolutionary/optimization_test.rs"
 [[bin]]
 name = "simulation_test"
 path = "src/quantum_simulation/simulation_test.rs"
+
+[[bin]]
+name = "orchestration_test"
+path = "src/distributed/orchestration_test.rs"
