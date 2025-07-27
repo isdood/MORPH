@@ -66,3 +66,7 @@ path = "src/quantum_simulation/simulation_test.rs"
 [[bin]]
 name = "orchestration_test"
 path = "src/distributed/orchestration_test.rs"
+
+[[bin]]
+name = "metrics_test"
+path = "src/consciousness_metrics/metrics_test.rs"

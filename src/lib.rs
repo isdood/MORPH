@@ -22,3 +22,5 @@ pub mod evolutionary;
 pub mod quantum_simulation;
 
 pub mod distributed;
+
+pub mod consciousness_metrics;
