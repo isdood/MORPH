@@ -1,3 +1,18 @@
+#!/bin/bash
+# Phase 17: Tensor Integration Implementation
+
+set -e
+
+# Ensure we're in the project root
+cd "$(dirname "$0")/.."
+
+echo "🚀 Starting Phase 17: Tensor Integration Implementation"
+
+# Create a backup of the original tensor file
+cp src/core/tensor.rs src/core/tensor.rs.bak
+
+# Update the tensor implementation with integration methods
+cat > src/core/tensor.rs << 'EOL'
 // Morphic Tensor: Fundamental 5D quantum structure
 #![allow(dead_code)]
 
@@ -270,3 +285,12 @@ mod tests {
         assert_eq!(batch[2].to_array(), array![5.0, 6.0]);
     }
 }
+EOL
+
+# Add the approx crate for floating point comparisons in tests
+if ! grep -q "approx" Cargo.toml; then
+    sed -i '/^\[dependencies\]/a approx = "0.5"' Cargo.toml
+fi
+
+echo "✅ Phase 17 completed successfully!"
+echo "The tensor module has been updated with integration methods for QNN layers and array operations."
