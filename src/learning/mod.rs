@@ -1,18 +1,3 @@
-#!/bin/bash
-# Phase 15: Implement Quantum-Inspired Learning
-
-set -e
-
-# Ensure we're in the project root
-cd "$(dirname "$0")/.."
-
-echo "🚀 Starting Phase 15: Quantum-Inspired Learning"
-
-# Create learning module directory if it doesn't exist
-mkdir -p src/learning
-
-# Create learning module files
-cat > src/learning/mod.rs << 'EOL'
 //! Quantum-Inspired Learning Module
 #![allow(dead_code)]
 
@@ -183,51 +168,3 @@ mod tests {
         assert!(action < action_dim);
     }
 }
-EOL
-
-# Clean up lib.rs by removing all learning module declarations and fix doc comment
-sed -i '/^pub mod learning;$/d' src/lib.rs
-
-# Ensure the file starts with the module declaration and proper doc comment
-cat > src/lib.rs << 'EOL'
-//! MORPH Core: Organic Computation Kernel
-
-pub mod learning;
-pub mod core;
-pub mod hippocampus;
-pub mod phylogenetic;
-pub mod quantum;
-pub mod bidirectional_compiler;
-pub mod field_stabilization;
-pub mod quantum_integration;
-pub mod consciousness;
-pub mod system_manifestation;
-pub mod quantum_classical;
-pub mod evolutionary;
-pub mod quantum_simulation;
-pub mod distributed;
-pub mod consciousness_metrics;
-pub mod hardware;
-EOL
-
-# Clean up duplicate rand dependency if it exists
-if grep -q 'rand = "0.8"' Cargo.toml; then
-    # Remove the older version of rand
-    sed -i '/rand = "0.8"/d' Cargo.toml
-    # Make sure we have the newer version
-    if ! grep -q 'rand = "0.8.5"' Cargo.toml; then
-        sed -i '/^\[dependencies\]/a rand = "0.8.5"' Cargo.toml
-    fi
-fi
-
-# Add other dependencies if they don't exist
-if ! grep -q "ndarray" Cargo.toml; then
-    sed -i '/^\[dependencies\]/a ndarray = "0.15"' Cargo.toml
-fi
-
-if ! grep -q "approx" Cargo.toml; then
-    sed -i '/^\[dependencies\]/a approx = "0.5"' Cargo.toml
-fi
-
-echo "✅ Phase 15 completed successfully!"
-echo "Run 'cargo test' to verify the implementation."
