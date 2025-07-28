@@ -70,3 +70,7 @@ path = "src/distributed/orchestration_test.rs"
 [[bin]]
 name = "metrics_test"
 path = "src/consciousness_metrics/metrics_test.rs"
+
+[[bin]]
+name = "hardware_test"
+path = "src/hardware/hardware_test.rs"

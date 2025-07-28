@@ -19,7 +19,7 @@ impl PhylogeneticRuntime {
     }
 
     /// Execute scripts in quantum superposition
-    pub fn execute_in_superposition(&self, tensors: &mut [MorphicTensor], script: &[QuantumOperation]) {
+    pub fn execute_in_superposition(&self, tensors: &mut [MorphicTensor], _script: &[QuantumOperation]) {
         println!("Executing script in superposition on {} tensors", tensors.len());
         // Actual quantum execution would go here
     }
