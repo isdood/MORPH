@@ -1,6 +1,7 @@
 //! MORPH Core: Organic Computation Kernel
 
 pub mod learning;
+pub mod environment;
 pub mod core;
 pub mod hippocampus;
 pub mod phylogenetic;
